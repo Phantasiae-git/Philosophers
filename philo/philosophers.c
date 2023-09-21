@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:31 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/09/21 11:40:56 by phantasiae       ###   ########.fr       */
+/*   Updated: 2023/09/21 14:57:32 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,22 +15,29 @@
 void	*thread_routine(void *args)
 {
 	gettimeofday();
-	printf("Think"); // outside of critical section
-	pthread_mutex_lock(&lock);
-	take fork n (if flag1=0, flag1=1, else if flag1=1, error)
-	take fork n+1 (if flag2=0, flag2=1, else if flag2=1, error)
-	(if flag1=1 && flag2=1?) eat
-	pthread_mutex_unlock(&lock);
-	usleep(args()->time_to_sleep); // outside of critical section
+	while(i<number_of_times_each_philosopher_must_eat || flag=1)
+	{
+		if(thread_id%2)
+			printf("Think"); // outside of critical section
+		pthread_mutex_lock(&lock);
+		take fork n (if flag1=0, flag1=1, else if flag1=1, error)
+		take fork n+1 (if flag2=0, flag2=1, else if flag2=1, error)
+		(if flag1=1 && flag2=1?) eat
+		pthread_mutex_unlock(&lock);
+		usleep(args()->time_to_sleep); // outside of critical section
+		if(!thread_id%2)
+			printf("Think"); // outside of critical section
+	}
 	return (NULL);
 }
 
 int	main(int argc, char **argv)
 {
 	int	i;
+	t_data *data;
 
 	pthread_t *threads malloc;
-	if (argc > 4 && argc < 7)
+	if (argc < 5 || argc > 6)
 	{
 		error("usage:");
 		return(0);
@@ -48,10 +55,11 @@ int	main(int argc, char **argv)
 		printf("\n mutex init has failed\n");
 		return (0);
 	}
+	gettimeofday();//simulation start
 	while (++i <= philo_num)
 	{
-		if (pthread_create(&threads[i], NULL, thread_routine, &threads[i]) != 0)
-			printf("\nThread can't be created :[%s]", strerror(error));
+		if (pthread_create(&threads[i], NULL, thread_routine, data) != 0)
+			error("Thread can't be created \n");
 	}
 	while (++i <= philo_num)
 	{
@@ -59,7 +67,10 @@ int	main(int argc, char **argv)
 			printf("\nError:[%s]", strerror(error));
 	}
 	pthread_mutex_destroy(&lock);
-	free(threads);
+	i=-1;
+	while(++i<philo_num)
+		free(data->philo[i]);
+	free(data);
 	printf("Error");
 	return (0);
 }

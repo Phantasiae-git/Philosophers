@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:42 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/09/21 11:10:16 by phantasiae       ###   ########.fr       */
+/*   Updated: 2023/09/21 15:32:06 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,16 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+typedef struct s_philo
+{
+	int				philo_num;
+	pthread_t		thread_id;
+	char			*status;
+	int				fork[2];
+	int				eatcount;
+	int				lastmeal;
+}					t_philo;
+
 typedef struct s_data
 {
 	int				number_of_philosophers;
@@ -31,15 +41,7 @@ typedef struct s_data
 	pthread_mutex_t	*fork_locks;// fork[number_of_philosophers]
 }					t_data;
 
-typedef struct s_philo
-{
-	int				philo_num;
-	pthread_t		thread_id;
-	char			*status;
-	int				fork[2];
-	int				eatcount;
-	int				lastmeal;
-}					t_philo;
+
 
 long				ft_atol(const char *str, long negative);
 t_philo				*philo(void);

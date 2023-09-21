@@ -1,26 +1,13 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/09/19 15:14:11 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/09/21 13:53:55 by rfontes-         ###   ########.fr       */
+/*   Created: 2023/09/21 14:27:24 by rfontes-          #+#    #+#             */
+/*   Updated: 2023/09/21 15:14:05 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
-
-t_philo	*philo(void)
-{
-	static t_philo	philo;
-
-	return (&philo);
-}
-
-void error(char *msg)
-{
-	printf("%s", msg);
-	return;
-}
