@@ -6,7 +6,7 @@
 /*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:31 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/09/21 14:57:32 by rfontes-         ###   ########.fr       */
+/*   Updated: 2023/09/26 14:53:21 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 void	*thread_routine(void *args)
 {
 	gettimeofday();
-	while(i<number_of_times_each_philosopher_must_eat || flag=1)
+	while (i < number_of_times_each_philosopher_must_eat || flag = 1)
 	{
-		if(thread_id%2)
+		if (thread_id % 2)
 			printf("Think"); // outside of critical section
 		pthread_mutex_lock(&lock);
 		take fork n (if flag1=0, flag1=1, else if flag1=1, error)
@@ -25,7 +25,7 @@ void	*thread_routine(void *args)
 		(if flag1=1 && flag2=1?) eat
 		pthread_mutex_unlock(&lock);
 		usleep(args()->time_to_sleep); // outside of critical section
-		if(!thread_id%2)
+		if (!thread_id % 2)
 			printf("Think"); // outside of critical section
 	}
 	return (NULL);
@@ -33,19 +33,19 @@ void	*thread_routine(void *args)
 
 int	main(int argc, char **argv)
 {
-	int	i;
-	t_data *data;
+	int		i;
+	t_data	*data;
 
 	pthread_t *threads malloc;
 	if (argc < 5 || argc > 6)
 	{
 		error("usage:");
-		return(0);
+		return (0);
 	}
 	if (!parsing(argc, argv))
 	{
 		error("invalid format or values");
-		return(0);
+		return (0);
 	}
 	threads = (pthread_t *)malloc(philo_num * sizeof(pthread_t));
 	threads = memset(threads, '\0', philo_num); // 0 instead of \0?
@@ -55,7 +55,7 @@ int	main(int argc, char **argv)
 		printf("\n mutex init has failed\n");
 		return (0);
 	}
-	gettimeofday();//simulation start
+	gettimeofday(); //simulation start
 	while (++i <= philo_num)
 	{
 		if (pthread_create(&threads[i], NULL, thread_routine, data) != 0)
@@ -67,8 +67,8 @@ int	main(int argc, char **argv)
 			printf("\nError:[%s]", strerror(error));
 	}
 	pthread_mutex_destroy(&lock);
-	i=-1;
-	while(++i<philo_num)
+	i = -1;
+	while (++i < philo_num)
 		free(data->philo[i]);
 	free(data);
 	printf("Error");

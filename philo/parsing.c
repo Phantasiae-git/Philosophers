@@ -6,7 +6,7 @@
 /*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 11:23:22 by phantasiae        #+#    #+#             */
-/*   Updated: 2023/09/21 13:53:17 by rfontes-         ###   ########.fr       */
+/*   Updated: 2023/09/28 18:19:11 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ int	isnum(char *s)
 	return (1);
 }
 
+//gotta be <12 because if it is smaller than int_max when it's at 10 digits it would not enter in the next loop check and be classified as under int_max
 int	ft_atol(const char *s, long negative)
 {
 	long	res;
@@ -32,16 +33,16 @@ int	ft_atol(const char *s, long negative)
 
 	i = -1;
 	res = 0;
-	while (i < 11 && (s[++i] && (s[i] >= '0' && s[i] <= '9')))
+	while (++i < 12 && (s[i] && (s[i] >= '0' && s[i] <= '9')))
 		res = res * 10 + (s[i] - '0');
 	if (res > INT_MAX)
-		return (INT_MAX);
+		return (-1);
 	return ((int)res);
 }
 
 int	parsing(int argc, char **argv)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (++i < argc)
@@ -51,14 +52,14 @@ int	parsing(int argc, char **argv)
 			error("numbers only");
 			return (0);
 		}
-		if (i == 1 && (res < 1 || ft_atol(argv[i]) > 200))
+		if (i == 1 && (ft_atol(argv[i]) < 1))
 		{
 			error("at least 1 philo");
 			return (0);
 		}
-		if (ft_atol(argv[i]) == INT_MAX)
+		if (ft_atol(argv[i]) < 0)
 		{
-			error("smaller timeframe pls");
+			error("time between 0 and int_max pls");
 			return (9);
 		}
 	}
