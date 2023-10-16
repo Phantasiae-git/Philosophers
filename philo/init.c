@@ -3,14 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:27:24 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/09/29 16:31:21 by rfontes-         ###   ########.fr       */
+/*   Updated: 2023/10/16 12:40:18 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+pthread_mutex_t *init_forks(t_data data)
+{
+	int i;
+	pthread_mutex_t *fork_locks;
+
+	i=0;
+	fork_locks=malloc(sizeof(pthread_mutex_t)* (data->number_of_philosophers));
+	if(!fork_locks)
+		return(NULL);
+	while(i<number_of_philosophers)
+	{
+		if(pthread_mutex_init(fork_locks[i++], NULL)!=0)
+			return(NULL);	
+	}
+	return(fork_locks);
+}
 
 t_philo **init_philo(t_data data)
 {
@@ -47,5 +64,10 @@ t_data *init_data(int argc, char **argv)
 	if(argc==6)
 		data->number_of_times_each_philosopher_must_eat=ft_atol(argv[5]);
 	data->philo=init_philo(data);
+	if(!data->philo)
+		return(NULL);
+	data->fork_locks=init_forks(data);
+	if(!data->fork_locks)
+		return(NULL);
 	return(data);
 }
