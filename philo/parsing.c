@@ -6,7 +6,7 @@
 /*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 11:23:22 by phantasiae        #+#    #+#             */
-/*   Updated: 2024/01/08 14:28:10 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/08 23:51:45 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ int	isnum(char *s)
 	return (1);
 }
 
-//gotta be <12 because if it is smaller than int_max when it's at 10 digits it would not enter in the next loop check and be classified as under int_max
 int	ft_atol(const char *s)
 {
 	long	res;
@@ -49,17 +48,17 @@ int	parsing(int argc, char **argv)
 	{
 		if (!isnum(argv[i]))
 		{
-			error("numbers only (and positive ones)");
+			errormsg("numbers only (and positive ones)");
 			return (0);
 		}
 		if (i == 1 && (ft_atol(argv[i]) < 1))
 		{
-			error("at least 1 philo");
+			errormsg("at least 1 philo");
 			return (0);
 		}
 		if (ft_atol(argv[i]) < 0)
 		{
-			error("time between 0 and int_max pls");
+			errormsg("time between 0 and int_max pls");
 			return (9);
 		}
 	}

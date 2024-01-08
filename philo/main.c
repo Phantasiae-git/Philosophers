@@ -6,7 +6,7 @@
 /*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:31 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/08 19:08:38 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/08 23:49:25 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,27 +14,31 @@
 
 void	*thread_routine(void *args)
 {
-	t_philo *
-	while (i < number_of_times_each_philosopher_must_eat || flag = 1)
+	t_philo	*philo;
+
+	philo = (t_philo *)args;
+	if (philo->data->number_of_philosophers < 2)
 	{
-		if (thread_id % 2)
-			printf("Think"); // outside of critical section
-		pthread_mutex_lock(&lock);
-		take fork n (if flag1=0, flag1=1, else if flag1=1, error)
-		take fork n+1 (if flag2=0, flag2=1, else if flag2=1, error)
-		(if flag1=1 && flag2=1?) eat
-		pthread_mutex_unlock(&lock);
-		usleep(args()->time_to_sleep); // outside of critical section
-		if (!thread_id % 2)
-			printf("Think"); // outside of critical section
+		printstuff(philo, TAKE_FORK);
+		ft_usleep(philo->data->time_to_die);
+	}
+	while (!grim_reaper(philo) && philo->data->status == 1)
+	{
+		if (philo->philo_num % 2 == 0)
+			think(philo);
+		eat(philo);
+		honkshoo(philo);
+		if (philo->philo_num % 2)
+			think(philo);
 	}
 	return (NULL);
 }
 
 int	main(int argc, char **argv)
 {
-	t_data	data;
-	int i;
+	t_data		data;
+	pthread_t	grim_reaper;
+	int			i;
 
 	if (argc < 5 || argc > 6)
 		return (-1);
@@ -43,15 +47,17 @@ int	main(int argc, char **argv)
 	if (init_data(argc, argv, &data) == 1)
 		return (-1);
 	data.start_time = timern();
-	i=-1;
+	i = -1;
+	pthread_create(&grim_reaper, NULL, &stop_sim, &data);
+	pthread_detach(grim_reaper);
 	while (++i < data.number_of_philosophers)
 	{
 		if (pthread_join(data.philo[i].thread_id, NULL) != 0)
 		{
 			errormsg("thread join failed.");
-			return(-1);
+			return (-1);
 		}
 	}
-	free_all(data);
+	free_all(&data);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:42 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/08 19:06:07 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/08 23:51:00 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,35 +21,52 @@
 # include <sys/time.h>
 # include <unistd.h>
 
+# define TAKE_FORK "has taken a fork"
+# define THINK "is thinking"
+# define SLEEP "is sleeping"
+# define EAT "is eating"
+# define X "died"
+
+struct	s_data;
+
 typedef struct s_philo
 {
-	int			philo_num;
-	pthread_t	thread_id;
-	int			status;
-	int fork[2]; // not necessarily left and right, but 1st and 2nd to be picked up
-	int			mealcount;
-	int			lastmeal;
-}				t_philo;
+	int				philo_num;
+	pthread_t		thread_id;
+	int				status;
+	int				fork[2];
+	int				mealcount;
+	int				lastmeal;
+	struct s_data	*data;
+}					t_philo;
 
-typedef struct s_data // both forks and philosophers start at 1
+typedef struct s_data // philosophers start at 1, forks at 0
 {
-	int number_of_philosophers;
-	int time_to_die;
-	int time_to_eat;
-	int time_to_sleep;
-	int number_of_times_each_philosopher_must_eat;
-	t_philo *philo;              // array starts at 0 tho ofc
-	pthread_mutex_t *fork_locks; // fork[number_of_philosophers]
-	pthread_mutex_t printlock;
-	int start_time;
-	int status;
-}				t_data;
+	int				number_of_philosophers;
+	int				time_to_die;
+	int				time_to_eat;
+	int				time_to_sleep;
+	int				number_of_times_each_philosopher_must_eat;
+	t_philo			*philo;
+	pthread_mutex_t	*fork_locks;
+	pthread_mutex_t	printlock;
+	int				start_time;
+	int				status;
+}					t_data;
 
-int				ft_atol(const char *str);
-t_philo			*philo(void);
-int				timern(void);
-int				init_data(int argc, char **argv, t_data *data);
-void			*thread_routine(void *args);
-void			errormsg(char *msg);
+int					timern(void);
+int					parsing(int argc, char **argv);
+int					ft_atol(const char *s);
+int					init_data(int argc, char **argv, t_data *data);
+void				*thread_routine(void *args);
+void				errormsg(char *msg);
+void				printstuff(t_philo *philo, char *s);
+void				ft_usleep(int time);
+void				think(t_philo *philo);
+void				honkshoo(t_philo *philo);
+void				eat(t_philo *philo);
+int					grim_reaper(t_philo *philo);
+void				*stop_sim(void *args);
+void				free_all(t_data *data);
 
 #endif
