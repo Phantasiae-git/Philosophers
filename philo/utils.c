@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:14:11 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/09/29 16:33:36 by rfontes-         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:21:32 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,11 +19,26 @@ t_philo	*philo(void)
 	return (&philo);
 }
 
-void printstuf
+t_data	*data(void)
+{
+	static t_data	data;
+
+	return (&data);
+}
+
+void printstuff(char *s, t_philo *philo)
+{
+	int time;
+
+	//check if the simulation should stop
+	pthread_mutex_lock(&data()->printlock);
+	time=timern();
+	printf("%d %d %s", time-(data()->start_time), philo->philo_num, s);
+	pthread_mutex_unlock(&data()->printlock);
+}
 
 void error(char *msg)
 {
-	if()
 	printf("%s", msg);
 	return;
 }
@@ -35,4 +50,13 @@ int	timern(void)
 	if (gettimeofday(&time, NULL) < 0)
 		return (0);
 	return ((time.tv_sec * 1000) + (time.tv_usec / 1000));
+}
+
+void	ft_usleep(int time)
+{
+	int	rn;
+
+	rn = timern();
+	while ((timern() - rn) < time)
+		usleep(time / 10);
 }

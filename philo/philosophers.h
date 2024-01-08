@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:42 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/09/29 16:16:30 by rfontes-         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:29:19 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,15 @@
 # include <stdio.h>
 # include <sys/time.h>
 # include <unistd.h>
+# include <stdlib.h>
 
 typedef struct s_philo
 {
 	int			philo_num;
-	pthread_t	thread_id;
+	pthread_t	thread_id;//not sure abt this
 	int			status;
 	int			fork[2];
-	int			eatcount;
+	int			mealcount;
 	int			lastmeal;
 }				t_philo;
 
@@ -39,10 +40,11 @@ typedef struct s_data
 	int			number_of_times_each_philosopher_must_eat;
 	t_philo		**philo;
 	pthread_mutex_t *fork_locks; // fork[number_of_philosophers]
+	pthread_mutex_t printlock;
 	int			start_time;
 }				t_data;
 
-long			ft_atol(const char *str, long negative);
+int			ft_atol(const char *str);
 t_philo			*philo(void);
 int				timern(void);
 

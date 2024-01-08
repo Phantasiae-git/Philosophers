@@ -6,7 +6,7 @@
 /*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:27:24 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/10/16 12:40:18 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/08 14:16:07 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ pthread_mutex_t *init_forks(t_data data)
 	pthread_mutex_t *fork_locks;
 
 	i=0;
-	fork_locks=malloc(sizeof(pthread_mutex_t)* (data->number_of_philosophers));
+	fork_locks=malloc(sizeof(pthread_mutex_t)*(data()->number_of_philosophers));
 	if(!fork_locks)
 		return(NULL);
 	while(i<number_of_philosophers)
@@ -34,7 +34,7 @@ t_philo **init_philo(t_data data)
 	int i;
 	t_philo **philos;
 	
-	philos=malloc(sizeof(t_philo)*data->number_of_philosophers);
+	philos=malloc(sizeof(t_philo)*(data.number_of_philosophers));
 	if(!philos)
 		return(NULL);
 	while(i<number_of_philosophers)

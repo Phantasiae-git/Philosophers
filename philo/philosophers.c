@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:31 by rfontes-          #+#    #+#             */
-/*   Updated: 2023/09/26 14:53:21 by rfontes-         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:33:53 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,20 +33,13 @@ void	*thread_routine(void *args)
 
 int	main(int argc, char **argv)
 {
-	int		i;
-	t_data	*data;
-
-	pthread_t *threads malloc;
 	if (argc < 5 || argc > 6)
 	{
 		error("usage:");
 		return (0);
 	}
 	if (!parsing(argc, argv))
-	{
-		error("invalid format or values");
 		return (0);
-	}
 	threads = (pthread_t *)malloc(philo_num * sizeof(pthread_t));
 	threads = memset(threads, '\0', philo_num); // 0 instead of \0?
 	i = 0;

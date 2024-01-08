@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
+/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 11:23:22 by phantasiae        #+#    #+#             */
-/*   Updated: 2023/09/28 18:19:11 by rfontes-         ###   ########.fr       */
+/*   Updated: 2024/01/08 14:28:10 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	isnum(char *s)
 }
 
 //gotta be <12 because if it is smaller than int_max when it's at 10 digits it would not enter in the next loop check and be classified as under int_max
-int	ft_atol(const char *s, long negative)
+int	ft_atol(const char *s)
 {
 	long	res;
 	int		i;
@@ -49,7 +49,7 @@ int	parsing(int argc, char **argv)
 	{
 		if (!isnum(argv[i]))
 		{
-			error("numbers only");
+			error("numbers only (and positive ones)");
 			return (0);
 		}
 		if (i == 1 && (ft_atol(argv[i]) < 1))
