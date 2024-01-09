@@ -8,7 +8,7 @@ SOURCEFILES	=	main.c	\
 NAME	= philo
 OBJ		= ${SOURCEFILES:.c=.o}
 RM			= rm -f
-FLAGS	= -Wall -Werror -Wextra -pthread #-g -fsanitize=address
+FLAGS	= -Wall -Werror -Wextra -pthread -fsanitize=address
 
 all: $(NAME)
 

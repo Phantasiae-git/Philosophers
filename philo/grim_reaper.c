@@ -6,7 +6,7 @@
 /*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/01/08 22:30:58 by phantasiae        #+#    #+#             */
-/*   Updated: 2024/01/09 16:10:26 by rfontes-         ###   ########.fr       */
+/*   Updated: 2024/01/09 17:56:34 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ void	*stop_sim(void *args)
 	t_data	*data;
 
 	data = (t_data *)args;
+	ft_usleep(data->time_to_die);
 	while (status_check(data))
 	{
 		full = 1;

@@ -6,7 +6,7 @@
 /*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:42 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/09 16:10:33 by rfontes-         ###   ########.fr       */
+/*   Updated: 2024/01/09 20:05:57 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct s_philo
 	struct s_data	*data;
 }					t_philo;
 
-typedef struct s_data // philosophers start at 1, forks at 0
+typedef struct s_data // philosophers start at 1 (not the array ofc), forks at 0
 {
 	int				number_of_philosophers;
 	int				time_to_die;
