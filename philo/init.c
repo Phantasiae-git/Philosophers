@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:27:24 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/09 00:08:56 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/09 15:36:50 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,8 @@ int	init_data(int argc, char **argv, t_data *data)
 	data->status = 1;
 	if (argc == 6)
 		data->number_of_times_each_philosopher_must_eat = ft_atol(argv[5]);
+	else
+		data->number_of_times_each_philosopher_must_eat = -1;
 	data->philo = init_philo(data, -1);
 	if (data->philo == NULL)
 		return (1);
@@ -80,5 +82,6 @@ int	init_data(int argc, char **argv, t_data *data)
 	if (!data->fork_locks)
 		return (1);
 	pthread_mutex_init(&data->printlock, NULL);
+	pthread_mutex_init(&data->statuslock, NULL);
 	return (0);
 }

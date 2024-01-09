@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:31 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/09 00:29:23 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/09 15:56:35 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,24 +17,20 @@ void	*thread_routine(void *args)
 	t_philo	*philo;
 
 	philo = (t_philo *)args;
-	printf("OLAaaaaaaaaaaaaa %d\n", philo->philo_num);
 	if (philo->data->number_of_philosophers < 2)
 	{
 		printstuff(philo, TAKE_FORK);
 		ft_usleep(philo->data->time_to_die);
 	}
-	while (grim_reaper(philo) && philo->data->status == 1)
+	while (status_check(philo->data))
 	{
-		printf("IF start\n");
 		if (philo->philo_num % 2 == 0)
 			think(philo);
 		eat(philo);
 		honkshoo(philo);
 		if (philo->philo_num % 2)
 			think(philo);
-		printf("IF end\n");
 	}
-	printf("thread end\n");
 	return (NULL);
 }
 

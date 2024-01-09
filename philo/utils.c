@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:14:11 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/09 00:13:10 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/09 15:21:48 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,5 @@ void	free_all(t_data *data)
 	free(data->fork_locks);
 	free(data->philo);
 	pthread_mutex_destroy(&data->printlock);
+	pthread_mutex_destroy(&data->statuslock);
 }

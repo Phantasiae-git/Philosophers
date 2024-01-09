@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philosophers.h                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:42 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/08 23:51:00 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/09 16:10:33 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ typedef struct s_data // philosophers start at 1, forks at 0
 	t_philo			*philo;
 	pthread_mutex_t	*fork_locks;
 	pthread_mutex_t	printlock;
+	pthread_mutex_t	statuslock;
 	int				start_time;
 	int				status;
 }					t_data;
@@ -67,6 +68,7 @@ void				honkshoo(t_philo *philo);
 void				eat(t_philo *philo);
 int					grim_reaper(t_philo *philo);
 void				*stop_sim(void *args);
+int					status_check(t_data *data);
 void				free_all(t_data *data);
 
 #endif
