@@ -6,7 +6,7 @@
 /*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:14:11 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/09 00:02:50 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/09 00:13:10 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,10 @@ void	printstuff(t_philo *philo, char *s)
 
 	data = philo->data;
 	pthread_mutex_lock(&data->printlock);
-	time = timern();
-	printf("%d %d %s\n", time - (data->start_time), philo->philo_num, s);
+	time = timern() - data->start_time;
+	if(time<0)
+		time=0;
+	printf("%d %d %s\n", time, philo->philo_num, s);
 	pthread_mutex_unlock(&data->printlock);
 }
 
