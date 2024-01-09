@@ -6,7 +6,7 @@
 /*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:14:11 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/08 23:43:52 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/09 00:02:50 by phantasiae       ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,6 @@ void	free_all(t_data *data)
 	int	i;
 
 	i = -1;
-	free(data->philo);
 	while (++i < data->number_of_philosophers)
 		pthread_mutex_destroy(&data->fork_locks[i]);
 	free(data->fork_locks);
