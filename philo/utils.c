@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/19 15:14:11 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/13 23:22:29 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/15 20:06:21 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,9 @@ void	printstuff(t_philo *philo, char *s)
 	data = philo->data;
 	pthread_mutex_lock(&data->printlock);
 	time = timern() - data->start_time;
-	if(time<0)
-		time=0;
-	if(status_check(data))
+	if (time < 0)
+		time = 0;
+	if (status_check(data))
 		printf("%d %d %s\n", time, philo->philo_num, s);
 	pthread_mutex_unlock(&data->printlock);
 }
@@ -43,8 +43,8 @@ void	ft_usleep(int time, t_data *data)
 	rn = timern();
 	while ((timern() - rn) < time)
 	{
-		if(!status_check(data))
-			break;
+		if (!status_check(data))
+			break ;
 		usleep(time / 10);
 	}
 }

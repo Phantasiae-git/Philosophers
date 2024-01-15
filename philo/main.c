@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/18 17:35:31 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/13 23:47:35 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/15 20:04:54 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,16 +23,16 @@ void	*thread_routine(void *args)
 		ft_usleep(philo->data->time_to_die, philo->data);
 	}
 	if (philo->philo_num % 2 == 0)
-		ft_usleep(50,philo->data);
+		ft_usleep(50, philo->data);
 	while (status_check(philo->data))
 	{
 		if (philo->philo_num % 2 == 0)
 			think(philo);
-		if(!status_check(philo->data))
-			break;
+		if (!status_check(philo->data))
+			break ;
 		eat(philo);
-		if(!status_check(philo->data))
-			break;
+		if (!status_check(philo->data))
+			break ;
 		honkshoo(philo);
 		if (philo->philo_num % 2)
 			think(philo);

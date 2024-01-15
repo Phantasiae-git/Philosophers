@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: phantasiae <phantasiae@student.42.fr>      +#+  +:+       +#+        */
+/*   By: rfontes- <rfontes-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/21 14:27:24 by rfontes-          #+#    #+#             */
-/*   Updated: 2024/01/13 22:43:52 by phantasiae       ###   ########.fr       */
+/*   Updated: 2024/01/15 20:04:22 by rfontes-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ pthread_mutex_t	*init_forks(t_data *data)
 
 	i = -1;
 	data->fork_locks = malloc(sizeof(pthread_mutex_t)
-		* (data->number_of_philosophers));
+			* (data->number_of_philosophers));
 	if (!data->fork_locks)
 		return (NULL);
 	while (++i < (data->number_of_philosophers))
@@ -49,6 +49,7 @@ t_philo	*init_philo(t_data *data, int i)
 			data->philo[i].fork[1] = i + 1;
 		data->philo[i].mealcount = 0;
 		data->philo[i].status = 1;
+		data->philo[i].lastmeal = timern();
 		if (pthread_create(&data->philo[i].thread_id, NULL, &thread_routine,
 				&(data->philo[i])) != 0)
 		{
@@ -56,7 +57,6 @@ t_philo	*init_philo(t_data *data, int i)
 			free(data->fork_locks);
 			return (NULL);
 		}
-		data->philo[i].lastmeal = timern();
 	}
 	return (data->philo);
 }
